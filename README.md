@@ -1,2 +1,3 @@
-This project aims to organize routine tasks
-Techs: NuxtJS, NodeJS, MongoDB, ExpressJS, Mongoose, TailwindJS
+This project aims to organize routine tasks 
+</br>
+Techs: VueJS, NodeJS, MongoDB, ExpressJS, Mongoose, TailwindJS
