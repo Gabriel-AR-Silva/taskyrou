@@ -1,0 +1,11 @@
+{
+  "name": "taskyrou",
+  "version": "1.0.0",
+  "description": "taskyrou system's api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gabriel Ribeiro",
+  "license": "ISC"
+}
