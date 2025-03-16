@@ -9,6 +9,9 @@ const taskSchema = new Schema({
         enum: ["pending", "doing", "done"],
         default: "pending"
     },
+}, {
+    timestamps: true,
+    collection: 'tasks'
 });
 
 const TaskModel = mongoose.model('TaskModel', taskSchema);
