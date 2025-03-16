@@ -1,9 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const { connectDB } = require('../db/config');
+const taskRoutes = require('../routes/taskRoute');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+
+// Routes
+app.use('/tasks', taskRoutes);
 
 // Connect to MongoDB
 connectDB();
