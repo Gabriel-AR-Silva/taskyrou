@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Routes
-app.use('/tasks', taskRoutes);
+app.use('/api/v1/tasks', taskRoutes);
 
 // Connect to MongoDB
 connectDB();
