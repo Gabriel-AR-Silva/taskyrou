@@ -1,13 +1,18 @@
 const TaskModel = require('../models/Task');
+const mongoose = require('mongoose');
 
 exports.getTask = async (req, res) => {
     try {
         const taskId = req.params.id;
 
+        if(!mongoose.Types.ObjectId.isValid(taskId)) {
+            res.status(404).send({ message: 'Task ID is not valid' });
+        }
+
         const task = await TaskModel.findById(taskId);
 
         if (!task) {
-            return res.status(404).send({ message: 'Task Not Found' });
+            return res.status(404).send({ message: 'Task not found' });
         }
 
         res.status(200).send(task);
@@ -20,11 +25,6 @@ exports.getTask = async (req, res) => {
 exports.getAllTasks = async (req, res) => {
     try {
         const tasks = await TaskModel.find();
-        
-        if(tasks.length === 0) {
-            return res.status(200).send({ message: 'No results found' })
-        }
-
         res.status(200).send(tasks);
     } catch (error) {
         console.log(`Error fetching all tasks: ${error}`);
@@ -55,6 +55,10 @@ exports.updateTask = async (req, res) => {
         const taskId = req.params.id;
         const data = req.body;
 
+        if(!mongoose.Types.ObjectId.isValid(taskId)) {
+            res.status(404).send({ message: 'Task ID is not valid' });
+        }
+
         const updatedTask = await TaskModel.findByIdAndUpdate(taskId, data, { new: true, runValidators: true});
 
         if (!updatedTask) {
@@ -71,6 +75,10 @@ exports.updateTask = async (req, res) => {
 exports.deleteTask = async (req, res) => {
     try {
         const taskId = req.params.id;
+
+        if(!mongoose.Types.ObjectId.isValid(taskId)) {
+            res.status(404).send({ message: 'Task ID is not valid' });
+        }
 
         const deletedTask = await TaskModel.findByIdAndDelete(taskId);
 
