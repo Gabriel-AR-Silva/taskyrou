@@ -15,6 +15,11 @@ defineProps({
       <a href="https://vite.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
+
+    <span class="text-3xl">
+      Hello world!
+    </span>
+    <button class="bg-sky-500 hover:bg-sky-700 ...">Save changes</button>
   </div>
 </template>
 
