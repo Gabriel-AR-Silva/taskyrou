@@ -22,6 +22,23 @@ exports.getTask = async (req, res) => {
     }
 };
 
+exports.getAllTasksByList = async (req, res) => {
+    try {
+        const tasks = await TaskModel.find();
+
+        const tasksByList = {
+            tasksPending: tasks.filter(task => task.status === 'pending'),
+            tasksDoing: tasks.filter(task => task.status === 'doing'),
+            tasksDone: tasks.filter(task => task.status === 'done'),
+        }
+
+        res.status(200).send(tasksByList);
+    } catch (error) {
+        console.log(`Error fetching all tasks by list: ${error}`);
+        res.status(500).send({ message: 'Failed to fetch all tasks by list', error: error.message });
+    }
+};
+
 exports.getAllTasks = async (req, res) => {
     try {
         const tasks = await TaskModel.find();
