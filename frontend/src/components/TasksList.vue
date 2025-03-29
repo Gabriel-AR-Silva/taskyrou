@@ -50,13 +50,13 @@ const sendEmitModalTask = (task) => {
         <h2 class="text-2xl font-medium mb-2 text-white py-2 lh-0">{{ title }}</h2>
 
         <div class="scrool-list px-2 h-100">
-            <div v-for="task in tasks" :key="task.id" class="mx-auto card-custom bg-white max-w-sm border border-gray-400 rounded-md mt-3">
+            <div v-for="task in tasks" :key="task.id" class="mx-auto card-custom bg-gray-100 max-w-sm border border-gray-400 rounded-md mt-3">
                 <span @click.prevent="sendEmitModalTask(task)" class="cursor-pointer">{{ task.title }}</span>
 
                 <select 
                     name="status" 
                     id="status" 
-                    class="border border-gray-300 rounded-sm px-3 pb-2 py-1 text-gray-700 bg-white shadow-sm 
+                    class="border border-gray-300 rounded-sm px-3 pb-2 py-1 text-gray-700 bg-gray-100 shadow-sm 
                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
                         hover:bg-gray-100 transition duration-200 cursor-pointer capitalize"
                     @change="saveEdit(task)"

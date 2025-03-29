@@ -14,10 +14,31 @@ const props = defineProps({
 const dataUpdate = reactive({...props.data})
 
 const saveEdit = async () => {
-  document.getElementById('titleModal').blur();
-  const response = await axios.put(`http://localhost:3000/api/v1/tasks/${props.data._id}`, dataUpdate);
-  descriptionEdit.value = false;
+  await axios.put(`http://localhost:3000/api/v1/tasks/${props.data._id}`, dataUpdate);
   dataUpdatedTask();
+}
+
+const saveTitle = async () => {
+  // Remove focus
+  document.getElementById('titleModal').blur();
+
+  if(dataUpdate.title.trim() === '') {
+    // Reset title value
+    dataUpdate.title = props.data.title;
+  }
+
+  saveEdit();
+}
+
+const saveDescription = async () => {
+  saveEdit();
+  descriptionEdit.value = false;
+}
+
+const cancelDescription = async () => {
+  // Reset description value
+  dataUpdate.description = props.data.description;
+  descriptionEdit.value = false;
 }
 
 const emit = defineEmits(['closeModal', 'dataUpdated'])
@@ -39,10 +60,11 @@ const dataUpdatedTask = () => {
           type="text" 
           name="titleModal" 
           id="titleModal" 
-          class="text-2xl font-semibold text-gray-400 mb-4 w-100" 
+          class="text-2xl font-semibold text-gray-400 mb-4 w-100 text-break" 
           v-model="dataUpdate.title"
-          @keyup.enter="saveEdit"
-          @focusout="saveEdit"
+          autocomplete="off" 
+          @keyup.enter="saveTitle"
+          @focusout="saveTitle"
         >
 
         <div class="flex flex-col">
@@ -51,7 +73,7 @@ const dataUpdatedTask = () => {
           <select 
             name="statusModal" 
             id="statusModal" 
-            class="border border-gray-300 rounded-sm pb-1 py-0 text-gray-900 bg-white shadow-sm 
+            class="border border-gray-300 rounded-sm pb-1 py-0 text-gray-900 bg-gray-200 shadow-sm 
               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
               hover:bg-gray-100 transition duration-200 cursor-pointer capitalize"
               v-model="dataUpdate.status"
@@ -78,11 +100,11 @@ const dataUpdatedTask = () => {
             <template v-if="descriptionEdit">
               <div>
                 <div class="icon-edit-task flex gap-3">
-                  <button class="text-green-300 hover:text-green-300 cursor-pointer" @click="saveEdit">
+                  <button class="text-green-300 hover:text-green-300 cursor-pointer" @click="saveDescription">
                     <small>Save</small>
                   </button>
 
-                  <button class="text-red-300 hover:text-red-300 cursor-pointer" @click="() => descriptionEdit = false">
+                  <button class="text-red-300 hover:text-red-300 cursor-pointer" @click="cancelDescription">
                     <small>Cancel</small>
                   </button>
                 </div>
