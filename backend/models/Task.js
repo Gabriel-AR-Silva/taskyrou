@@ -11,7 +11,15 @@ const taskSchema = new Schema({
             message: 'Title is required.'
         }
     },
-    "description": String,
+    "description": {
+        type: String,
+        validate: {
+            validator: function (value) {
+                return value.trim().length > 1000;
+            },
+            message: 'The maximum length is 1000.'
+        }
+    },
     "status": {
         type: String,
         required: true,

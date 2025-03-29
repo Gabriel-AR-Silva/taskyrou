@@ -1,9 +1,10 @@
 <script setup>
 import axios from 'axios';
-import { defineProps, defineEmits, ref, reactive } from 'vue';
+import { defineProps, defineEmits, ref, reactive, onMounted } from 'vue';
 
 const statusList = ref(['pending', 'doing', 'done']);
 let descriptionEdit = ref(false);
+const textarea = ref(null);
 
 const props = defineProps({
   data: {
@@ -11,10 +12,18 @@ const props = defineProps({
   }
 })
 
+const autoResize = () => {
+  const el = textarea.value;
+  el.style.height = "auto"; // Reseta a altura
+  el.style.height = el.scrollHeight + "px"; // Ajusta para o conteúdo
+};
+
 const dataUpdate = reactive({...props.data})
 
 const saveEdit = async () => {
   await axios.put(`http://localhost:3000/api/v1/tasks/${props.data._id}`, dataUpdate);
+
+  // Refresh page data
   dataUpdatedTask();
 }
 
@@ -50,22 +59,28 @@ const closeModalTask = () => {
 const dataUpdatedTask = () => {
   emit('dataUpdated');
 }
+
+onMounted(() => {
+  autoResize(); 
+});
 </script>
 
 <template>
     <div class="fade fixed inset-0 flex items-center justify-center bg-gray-500/75 p-3">
       <div class="modal bg-header p-6 rounded-lg shadow-lg flex flex-col">
-        <label class="text-gray-200 text-sm mr-2" for="titleModal">Título: </label>
-        <input 
-          type="text" 
+        <label class="text-gray-200 text-sm mr-2" for="titleModal">Title: </label>
+
+        <textarea  
+          class="rounded-sm text-2xl font-semibold text-gray-400 p-2 w-full mb-4 resize-none overflow-hidden"
+          @input="autoResize"
+          maxlength="150"
           name="titleModal" 
           id="titleModal" 
-          class="text-2xl font-semibold text-gray-400 mb-4 w-100 text-break" 
+          ref="textarea"
+          rows="1"
           v-model="dataUpdate.title"
-          autocomplete="off" 
-          @keyup.enter="saveTitle"
           @focusout="saveTitle"
-        >
+        ></textarea>
 
         <div class="flex flex-col">
           <label class="text-gray-200 text-sm mr-2" for="statusModal">Status: </label>
@@ -93,7 +108,7 @@ const dataUpdatedTask = () => {
           <div class="flex items-center" >
             <template v-if="!descriptionEdit">
               <span class="icon-edit-task text-gray-300 hover:text-gray-300 cursor-pointer" @click="() => descriptionEdit = true">
-                <small>Editar <i class='bx bxs-edit' ></i></small>
+                <small>Edit <i class='bx bxs-edit' ></i></small>
               </span>
             </template>
 
@@ -114,16 +129,25 @@ const dataUpdatedTask = () => {
             <span class="text-gray-200 text-sm mr-2">Description: </span>
 
             <p v-if="!descriptionEdit" class="text-gray-400 border-l-2 border-gray-500 pl-3 mt-3">{{ dataUpdate.description }}</p>
+            <p v-if="!descriptionEdit && dataUpdate.description === ''" class="text-gray-400 border-l-2 border-gray-500 pl-3 mt-3"><small>No description</small></p>
 
           <textarea  
             v-if="descriptionEdit"
-            class="border-1 border-gray-500 rounded-sm text-gray-300 p-2"
-            style="width: 100%" 
+            maxlength="1000"
+            class="border-1 border-gray-500 rounded-sm text-gray-300 p-2 w-full resize-none placeholder:text-gray-300"
+            style="height: 250px" 
             name="description" 
             id="description" 
             rows="3"
             v-model="dataUpdate.description"
+            placeholder="Describe this task📝..."
           ></textarea>
+
+          <p v-if="descriptionEdit" class="text-end text-gray-300">
+            <small>
+              {{ dataUpdate.description ? dataUpdate.description.length : 0 }} / 1000
+            </small>
+          </p>
         </div>
 
         <div class="mt-4 flex justify-end">
