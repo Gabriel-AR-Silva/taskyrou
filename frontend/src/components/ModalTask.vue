@@ -129,7 +129,7 @@ onMounted(() => {
             <span class="text-gray-200 text-sm mr-2">Description: </span>
 
             <p v-if="!descriptionEdit" class="text-gray-400 border-l-2 border-gray-500 pl-3 mt-3">{{ dataUpdate.description }}</p>
-            <p v-if="!descriptionEdit && dataUpdate.description === ''" class="text-gray-400 border-l-2 border-gray-500 pl-3 mt-3"><small>No description</small></p>
+            <p v-if="!descriptionEdit && !dataUpdate.description" class="text-gray-400 border-l-2 border-gray-500 pl-3 mt-3"><small>No description</small></p>
 
           <textarea  
             v-if="descriptionEdit"
