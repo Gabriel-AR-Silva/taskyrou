@@ -35,10 +35,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="dashboard" class="container mx-auto mt-5">
-    <h1 class="text-2xl text-start">| Dashboard</h1>
+  <div id="dashboard" class="container mx-auto mt-5 pb-5">
+    <h1 class="text-2xl text-start pl-3">| Dashboard</h1>
 
-    <div class="grid grid-cols-12 gap-4 mt-5">
+    <div class="grid grid-cols-12 gap-4 mt-5 px-3">
       <TasksList title="Pending" :tasks="tasksByList.tasksPending" @openModalTask="openModalTask" @dataUpdated="getAllTasks()" />
       <TasksList title="Doing" :tasks="tasksByList.tasksDoing" @openModalTask="openModalTask" @dataUpdated="getAllTasks()" />
       <TasksList title="Done" :tasks="tasksByList.tasksDone" @openModalTask="openModalTask" @dataUpdated="getAllTasks()" />

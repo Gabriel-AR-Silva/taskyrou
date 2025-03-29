@@ -1,11 +1,9 @@
 <script setup>
 import axios from 'axios';
-import { defineProps, ref, defineEmits } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 // Definindo os eventos que o componente pode emitir
 const emit = defineEmits(['openModalTask', 'dataUpdated']);
-
-const statusList = ref(['pending', 'doing', 'done']);
 
 const props = defineProps({
     title: {
@@ -18,20 +16,17 @@ const props = defineProps({
     }
 })
 
-const saveEdit = async (data = null) => {
-  const response = await axios.put(`http://localhost:3000/api/v1/tasks/${data._id}`, data);
-  dataUpdatedTask();
-}
-
 const saveCreate = async () => {
     let data = {};
     data.title = 'New Task';
     data.status = props.title.toLowerCase();
 
   const response = await axios.post(`http://localhost:3000/api/v1/tasks`, data);
+
+// Refresh page's data
   dataUpdatedTask();
+
   sendEmitModalTask(response.data);
-  console.log(response);
 }
 
 const dataUpdatedTask = () => {
@@ -44,31 +39,14 @@ const sendEmitModalTask = (task) => {
 </script>
 
 <template>
-    <div class="relative col-span-4 px-2 text-center bg-header pt-0 p-6 rounded-lg shadow-lg">
+    <div class="relative col-span-12 md:col-span-4 px-2 text-center bg-header pt-0 p-6 rounded-lg shadow-lg">
         <i class='icon-add-task bx bx-plus bx-sm cursor-pointer' @click.prevent="saveCreate()"></i>
 
         <h2 class="text-2xl font-medium mb-2 text-white py-2 lh-0">{{ title }}</h2>
 
         <div class="scrool-list px-2 h-100">
             <div v-for="task in tasks" :key="task.id" class="mx-auto card-custom bg-gray-100 max-w-sm border border-gray-400 rounded-md mt-3">
-                <span @click.prevent="sendEmitModalTask(task)" class="cursor-pointer">{{ task.title }}</span>
-
-                <select 
-                    name="status" 
-                    id="status" 
-                    class="border border-gray-300 rounded-sm px-3 pb-2 py-1 text-gray-700 bg-gray-100 shadow-sm 
-                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                        hover:bg-gray-100 transition duration-200 cursor-pointer capitalize"
-                    @change="saveEdit(task)"
-                    v-model="task.status"
-                >
-                    <option selected default disabled>{{ task.status }}</option>
-                    <option v-for="(statusItem, index) in statusList.filter(s => s !== task.status)" 
-                        :key="index" 
-                        :value="statusItem">
-                        {{ statusItem }}
-                    </option>
-                </select>
+                <span @click.prevent="sendEmitModalTask(task)" class="text-start cursor-pointer">{{ task.title }}</span>
             </div>
         </div>
     </div>
@@ -80,8 +58,7 @@ const sendEmitModalTask = (task) => {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0px 1rem;
-        gap: 5rem;
+        padding: 1rem .5rem;
     }
 
     .scrool-list {

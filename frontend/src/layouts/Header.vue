@@ -2,7 +2,7 @@
     <nav class="p-4 shadow bg-header">
       <div class="container mx-auto">
         <router-link to="/">
-          <h1 class="text-xl font-bold text-custom-header">Taskyrou</h1>
+          <span class="text-xl font-bold text-custom-header">Taskyrou</span>
         </router-link>
       </div>
     </nav>

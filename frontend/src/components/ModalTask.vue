@@ -23,7 +23,7 @@ const dataUpdate = reactive({...props.data})
 const saveEdit = async () => {
   await axios.put(`http://localhost:3000/api/v1/tasks/${props.data._id}`, dataUpdate);
 
-  // Refresh page data
+  // Refresh page's data
   dataUpdatedTask();
 }
 
@@ -67,7 +67,7 @@ onMounted(() => {
 
 <template>
     <div class="fade fixed inset-0 flex items-center justify-center bg-gray-500/75 p-3">
-      <div class="modal bg-header p-6 rounded-lg shadow-lg flex flex-col">
+      <div class="bg-header p-6 rounded-lg shadow-lg flex flex-col min-w-[100%] md:min-w-[60%]">
         <label class="text-gray-200 text-sm mr-2" for="titleModal">Title: </label>
 
         <textarea  
@@ -160,10 +160,6 @@ onMounted(() => {
 <style scoped>
     .bg-header {
         background-color: #0F1625;
-    }
-
-    .modal {
-      width: 45%;
     }
 
     .icon-edit-task {
