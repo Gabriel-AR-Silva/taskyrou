@@ -5,6 +5,7 @@ import App from './App.vue'
 
 import router from './router'
 import { RouterLink } from 'vue-router'
+import "boxicons/css/boxicons.css";
 
 const app = createApp(App)
 
