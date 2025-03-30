@@ -45,7 +45,7 @@ const sendEmitModalTask = (task) => {
         <h2 class="text-2xl font-medium mb-2 text-white py-2 lh-0">{{ title }}</h2>
 
         <div class="scrool-list px-2 h-100">
-            <div v-for="task in tasks" :key="task.id" class="mx-auto card-custom bg-gray-100 max-w-sm border border-gray-400 rounded-md mt-3">
+            <div v-for="task in tasks" :key="task.id" class="mx-auto card-custom bg-gray-100 w-full border border-gray-400 rounded-md mt-3">
                 <span @click.prevent="sendEmitModalTask(task)" class="text-start cursor-pointer">{{ task.title }}</span>
             </div>
         </div>
