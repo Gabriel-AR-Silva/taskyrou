@@ -15,7 +15,7 @@ const taskSchema = new Schema({
         type: String,
         validate: {
             validator: function (value) {
-                return value.trim().length > 1000;
+                return value.trim().length <= 1000;
             },
             message: 'The maximum length is 1000.'
         }
