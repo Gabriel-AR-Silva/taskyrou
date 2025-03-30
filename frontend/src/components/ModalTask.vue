@@ -1,9 +1,12 @@
 <script setup>
 import axios from 'axios';
+import { useMessageStore } from '@/stores/messageStore'
 import { defineProps, defineEmits, ref, reactive, onMounted } from 'vue';
 
 const statusList = ref(['pending', 'doing', 'done']);
 const textarea = ref(null);
+
+const messageStore = useMessageStore();
 
 let descriptionEdit = ref(false);
 let confirmModalAction = ref(false);
@@ -30,12 +33,17 @@ const saveEdit = async () => {
 }
 
 const taskDelete = async () => {
-  await axios.delete(`http://localhost:3000/api/v1/tasks/${props.data._id}`);
-
-  closeModalTask()
+  try {
+    const response = await axios.delete(`http://localhost:3000/api/v1/tasks/${props.data._id}`);
+    messageStore.setMessage(response.data.message)
   
-  // Refresh page's data
-  dataUpdatedTask();
+    closeModalTask()
+  
+    // Refresh page's data
+    dataUpdatedTask();
+  } catch (error) {
+    
+  }
 }
 
 const saveTitle = async () => {

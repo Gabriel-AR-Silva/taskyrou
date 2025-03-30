@@ -60,7 +60,7 @@ exports.createTask = async (req, res) => {
             return res.status(500).send({ message: 'Failed to create task' });
         }
 
-        res.status(201).send(newTask);
+        res.status(201).send({ task: newTask, message: 'Task was created successfully' });
     } catch (error) {
         console.log(`Error creating task: ${error.message}`);
         res.status(500).send({ message: 'Error creating task', error: error.message });

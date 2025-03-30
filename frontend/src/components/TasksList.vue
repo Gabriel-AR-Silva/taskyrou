@@ -1,6 +1,9 @@
 <script setup>
+import { useMessageStore } from '@/stores/messageStore'
 import axios from 'axios';
 import { defineProps, defineEmits } from 'vue';
+
+const messageStore = useMessageStore();
 
 // Definindo os eventos que o componente pode emitir
 const emit = defineEmits(['openModalTask', 'dataUpdated']);
@@ -21,12 +24,14 @@ const saveCreate = async () => {
     data.title = 'New Task';
     data.status = props.title.toLowerCase();
 
-  const response = await axios.post(`http://localhost:3000/api/v1/tasks`, data);
+    const response = await axios.post(`http://localhost:3000/api/v1/tasks`, data);
 
-// Refresh page's data
-  dataUpdatedTask();
+    // Refresh page's data
+    dataUpdatedTask();
 
-  sendEmitModalTask(response.data);
+    sendEmitModalTask(response.data.task);
+
+    messageStore.setMessage(response.data.message)
 }
 
 const dataUpdatedTask = () => {
