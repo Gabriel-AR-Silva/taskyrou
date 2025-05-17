@@ -109,3 +109,31 @@ exports.deleteTask = async (req, res) => {
         res.status(500).send({ message: 'Error deleting task', error: error.message });
     }
 };
+
+exports.changeStatusTask = async (req, res) => {
+    try {
+        const taskId = req.params.id;
+        const { status } = req.body;
+
+        // valida se o ID é válido
+        if (!mongoose.Types.ObjectId.isValid(taskId)) {
+            return res.status(400).send({ message: 'Task ID is not valid' });
+        }
+
+        // atualiza só o campo "status"
+        const updatedTask = await TaskModel.findByIdAndUpdate(
+            taskId,
+            { status },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedTask) {
+            return res.status(404).send({ message: 'Task not found' });
+        }
+
+        return res.status(200).send(updatedTask);
+    } catch (error) {
+        console.error(`Error updating task status: ${error.message}`);
+        return res.status(500).send({ message: 'Internal server error', error: error.message });
+    }
+};

@@ -4,11 +4,13 @@ const {
     createTask, 
     updateTask, 
     deleteTask, 
-    getAllTasksByList 
+    getAllTasksByList,
+    changeStatusTask 
 } = require('../controllers/taskController');
 
 const router = require('express').Router();
 
+router.patch('/change-status/:id', changeStatusTask);
 router.get('/by-list', getAllTasksByList);
 router.get('/:id', getTask);
 router.get('/', getAllTasks);
