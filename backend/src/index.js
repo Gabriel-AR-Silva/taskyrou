@@ -5,6 +5,7 @@ const { connectDB } = require('../db/config');
 
 const taskRoutes = require('../routes/taskRoute');
 const attributeRoutes = require('../routes/attributeRoute');
+const listRoutes = require('../routes/listRoute');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use(cors({
 // Routes
 app.use('/api/v1/tasks', taskRoutes);
 app.use('/api/v1/attributes', attributeRoutes);
+app.use('/api/v1/lists', listRoutes);
 
 // Connect to MongoDB
 connectDB();
