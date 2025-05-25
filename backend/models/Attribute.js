@@ -21,10 +21,6 @@ const attributeSchema = new Schema({
             message: 'The maximum length is 1000.'
         }
     },
-    "value": {
-        type: String,
-        required: true
-    },
     "level": {
         type: Number ,
         default: 0

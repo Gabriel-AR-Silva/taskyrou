@@ -16,8 +16,7 @@ exports.createAttribute = async (req, res) => {
         const data = req.body;
 
         console.log(data);
-        
-
+    
         const newAttribute = new AttributeModel(data);
         await newAttribute.save();
 
