@@ -16,6 +16,12 @@ const router = createRouter({
       meta: { title: 'Dashboard - Taskyrou' }, 
       component: () => import('@/views/Dashboard.vue'), 
     },
+    {
+      path: '/configuration',
+      name: 'configuration',
+      meta: { title: 'Configuration - Taskyrou' }, 
+      component: () => import('@/views/Configuration.vue'), 
+    },
   ],
 })
 
