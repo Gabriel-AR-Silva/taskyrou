@@ -6,6 +6,8 @@ import { reactive, onMounted, ref } from 'vue';
 
 let openModalTaskData = reactive({ openModalTask: false, task: {}})
 
+const user_emoji = '🎶';
+
 // Reactive object to store tasks
 const tasksByList = reactive({
   tasksPending: [],
@@ -68,7 +70,9 @@ onMounted(() => {
             <div class="grid grid-cols-12">
               <div class="col-span-12 md:col-span-4">
                 <div class="flex gap-3">
-                  <div class="img-profile rounded-sm"></div>
+                  <div class="relative img-profile rounded-sm">
+                    <div class="user_emoji">{{ user_emoji }}</div>
+                  </div>
                   <div class="col-span-8"><h2 class="text-xl">Gabriel ADM</h2></div>
                 </div>
               </div>
@@ -109,5 +113,12 @@ onMounted(() => {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  .user_emoji {
+    position: absolute;
+    right: -10%;
+    bottom: -10%;
+    user-select: none;
   }
 </style>
