@@ -6,73 +6,74 @@ Techs: VueJS, Vite, Axios, TailwindJS... (Maybe: Styled Components)
 ## Back end
 Techs: NodeJS, MongoDB, ExpressJS, Mongoose...
 
-# 🌟 Sistema Gamificado de Produtividade Pessoal
+# 🌟 Gamified Personal Productivity System
 
-Este é um **sistema gamificado de produtividade**, desenvolvido para transformar tarefas e metas do dia a dia em uma jornada divertida, recompensadora e focada no crescimento pessoal.
-
----
-
-## 🎯 Conceito
-
-O sistema estimula o usuário a **crescer e prosperar na vida real** por meio da conclusão de tarefas e objetivos. Cada tarefa completada concede:
-
-- **Pontos de Experiência (XP)**: aumentam seus atributos.
-- **Pontos de Prosperidade**: acumulam-se e podem ser usados na **Loja da Prosperidade**, onde o usuário se recompensa por sua produtividade com metas pessoais (como um tênis novo, um sorvete, etc).
+This is a **gamified productivity system** designed to turn everyday tasks and goals into a fun, rewarding journey focused on personal growth.
 
 ---
 
-## ⚔️ Dificuldade das Tarefas
+## 🎯 Concept
 
-Cada tarefa pode ser classificada em:
+The system encourages users to **grow and thrive in real life** by completing tasks and objectives. Each completed task grants:
 
-- **Fácil**
-- **Médio**
-- **Difícil**
-- **Personalizado** (definido pelo próprio usuário)
-
-Quanto maior a dificuldade, **maior o ganho de XP e pontos de prosperidade**.
+- **Experience Points (XP)**: boost your personal attributes.
+- **Prosperity Points**: accumulate and can be spent in the **Prosperity Shop**, where you reward yourself for your efforts (e.g., a new pair of shoes, an ice cream, or anything else you feel you deserve).
 
 ---
 
-## 🧠 Atributos e Estatísticas
+## ⚔️ Task Difficulty
 
-As tarefas estão ligadas a **atributos**, como:
+Each task can be marked as:
 
-- 🧠 Inteligência (ex: estudar)
-- 💪 Força (ex: treino)
-- 🎯 Foco
-- ❤️ Saúde
-- 📈 Disciplina
+- **Easy**
+- **Medium**
+- **Hard**
+- **Custom** (defined by the user)
 
-Completando tarefas, você ganha XP em atributos relacionados. Isso cria uma **sensação real de evolução pessoal**, com progresso visível e mensurável.
-
----
-
-## 🗂 Organização Visual
-
-- **Kanban estilo Trello**: crie listas e cartões para organizar suas tarefas e projetos.
-- **Calendário integrado**: visualize e adicione tarefas com datas específicas.
-- **Metas mensais**: como “correr 50 km em um mês”. Ao concluir, você recebe XP e prosperidade nos atributos correspondentes.
+The higher the difficulty, the **greater the XP and prosperity rewards**.
 
 ---
 
-## 🚀 Propósito
+## 🧠 Attributes and Stats
 
-O sistema não substitui o esforço pessoal, mas o transforma em uma experiência **motivadora e divertida**. 
+Tasks are linked to **attributes**, such as:
 
-> **Quanto mais você se dedica, mais você evolui — tanto no sistema quanto na vida real.**
+- 🧠 Intelligence (e.g., studying)
+- 💪 Strength (e.g., working out)
+- 🎯 Focus
+- ❤️ Health
+- 📈 Discipline
+
+Completing tasks grants XP to related attributes. This creates a **real sense of personal growth**, with visible and measurable progress.
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## 🗂 Visual Organization
+
+- **Trello-style Kanban Board**: create lists, and cards to organize your tasks and projects.
+- **Integrated Calendar**: view and schedule tasks on specific dates.
+- **Monthly Goals**: for example, “run 50km this month.” Upon completion, you earn XP and prosperity in the relevant attributes.
+
+---
+
+## 🚀 Purpose
+
+The system doesn’t replace personal effort—it transforms it into a **motivating and enjoyable experience**.
+
+> **The more you commit, the more you grow—in the system and in real life.**
+
+---
+
+## 🛠 Technologies Used
 
 - **Node.js** (backend)
-- **MongoDB** (banco de dados)
+- **MongoDB** (database)
 - **Vue.js** (frontend)
 
 ---
 
-## ✅ Em Desenvolvimento
+## ✅ In Progress
 
-Este projeto está em desenvolvimento contínuo. Novas funcionalidades, melhorias e correções estão por vir!
+This project is under active development. New features, improvements, and fixes are on the way!
+
 
