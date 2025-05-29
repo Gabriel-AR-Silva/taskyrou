@@ -1,0 +1,44 @@
+/* theme-variables.css */
+
+/* =========================
+   Root color configuration
+   ========================= */
+:root {
+  /* Primary Palette */
+  --color-primary: #0F1625; 
+  --color-secondary: rgb(43 127 255);
+
+  /* Background Colors */
+  --color-bg: #dbd6d6;
+
+}
+
+/* =========================
+   Utility Classes
+   ========================= */
+
+/* Text Colors */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-gray {
+  color: var(--color-bg);
+}
+
+/* Background Colors */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-gray {
+  background-color: var(--color-bg);
+}
