@@ -1,4 +1,5 @@
 <script setup>
+import FormConfiguration from '@/components/Configuration/FormConfiguration.vue';
 import { useMessageStore } from '@/stores/messageStore'
 import { reactive, ref } from 'vue';
 import axios from  'axios';
@@ -49,7 +50,7 @@ const formSubmit = async () => {
     <h1 class="text-2xl text-start">| Configuration</h1>
 
     <div class="grid grid-cols-12 gap-5 mt-5">
-      <div class="col-span-12 md:col-span-4">
+      <div class="col-span-12 md:col-span-2">
         <div class="w-full p-3 bg-white rounded border-grey">
           <ul class="flex flex-col gap-1">
             <li 
@@ -69,10 +70,13 @@ const formSubmit = async () => {
         </div>
       </div>
 
-      <div class="col-span-12 md:col-span-8">
+      <div class="col-span-12 md:col-span-10">
         <template v-if="activePage == 'geral'">
-          <!-- Nothing here yet -->
-          <span>Nothing here yet</span>
+          <div class="w-full p-3 bg-white rounded-sm border-grey">
+            <h2 class="text-2xl text-center">Information</h2>
+      
+            <FormConfiguration />
+          </div>
         </template>
         
         <template v-if="activePage == 'attributes'">
