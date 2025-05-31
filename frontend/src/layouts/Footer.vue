@@ -25,6 +25,7 @@ const messageStore = useMessageStore();
     position: absolute;
     bottom: 2%;
     right: 1%;
+    z-index: 1000;
 }
 
 /* Animation for the progress bar */

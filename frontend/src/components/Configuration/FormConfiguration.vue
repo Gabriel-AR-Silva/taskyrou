@@ -4,6 +4,8 @@ import { onMounted, ref, toRaw } from "vue";
 import { useMessageStore } from '@/stores/messageStore'
 const messageStore = useMessageStore();
 
+const emit = defineEmits(['configUpdated']);
+
 const props = defineProps({
     showRefreshFields: {
         type: Boolean,
@@ -23,6 +25,7 @@ const formSubmit = async () => {
         const response = await axios.put(`http://localhost:3000/api/v1/configurations`, updateData);
         messageStore.setMessage(response.data.message);
         getConfigurationData();
+        emit('configUpdated');
     } catch (error) {
         console.log(error);
         messageStore.setMessage(error.message)
