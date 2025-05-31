@@ -12,8 +12,6 @@ let attributes = ref([]);
 const getAllAttributes = async () => {
   const response = await axios.get('http://localhost:3000/api/v1/attributes');
   attributes.value = response.data;
-  console.log('teste');
-  
 }
 
 const getConfigurationData = async () => {

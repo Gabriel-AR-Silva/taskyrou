@@ -4,6 +4,8 @@ import { onMounted, ref, toRaw } from "vue";
 import { useMessageStore } from '@/stores/messageStore'
 const messageStore = useMessageStore();
 
+let inProccess = ref(false);
+
 const emit = defineEmits(['configUpdated']);
 
 const props = defineProps({
@@ -21,6 +23,7 @@ let form = ref({
 
 const formSubmit = async () => {
     try {
+        inProccess.value = true;
         const updateData = {...form.value};
         const response = await axios.put(`http://localhost:3000/api/v1/configurations`, updateData);
         messageStore.setMessage(response.data.message);
@@ -29,6 +32,8 @@ const formSubmit = async () => {
     } catch (error) {
         console.log(error);
         messageStore.setMessage(error.message)
+    } finally {
+        inProccess.value = false;
     }
 }
 
@@ -88,7 +93,7 @@ onMounted(() => {
             <textarea id="user_phrases" v-model="form.user_phrases" name="user_phrases" rows="2" class="mt-1 block w-full px-2 py-1 border rounded text-sm"></textarea>
         </div>
 
-        <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer">
+        <button type="submit" :disabled="inProccess" class="bg-blue-500 text-white px-4 py-1 rounded text-sm hover:bg-blue-600 cursor-pointer">
             Submit
         </button>
     </form>
