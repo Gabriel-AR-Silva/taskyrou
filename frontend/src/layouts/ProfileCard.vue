@@ -77,11 +77,15 @@ onMounted(() => {
                         </div>
                     </div>
 
-                    <div class="col-span-8"><h2 class="text-xl">{{ configurationData.user_name }}</h2></div>
+                    <div class="col-span-8">
+                      <p class="text-[.65rem]">Name:</p>
+                      <h2 class="text-xl leading-none">{{ configurationData.user_name }}</h2>
+                    </div>
                 </div>
             </div>
 
             <div class="col-span-12 lg:col-span-8">
+                <p class="text-[.65rem]">Attributes:</p>
                 <ul class="flex flex-wrap items-center gap-1 mt-3 lg:mt-0">
                     <li v-for="attr in attributes" :key="attr._id" class="flex flex-col shadow-xl border-gray-300 border-1 rounded p-1">
                         <span class="text-sm">{{ attr.title }} Lv. {{ attr.level }}</span> 
