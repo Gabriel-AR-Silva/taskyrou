@@ -1,5 +1,7 @@
 <script setup>
 import FormConfiguration from '@/components/Configuration/FormConfiguration.vue';
+import AttributeList from '@/components/Attribute/AttributeList.vue';
+
 import { useMessageStore } from '@/stores/messageStore'
 import { reactive, ref } from 'vue';
 import axios from  'axios';
@@ -81,34 +83,9 @@ const formSubmit = async () => {
         
         <template v-if="activePage == 'attributes'">
           <div class="w-full p-3 bg-white rounded-sm border-grey">
-            <h2 class="text-2xl text-center">Create Attributes</h2>
+            <h2 class="font-bold text-2xl text-center mb-5">Attributes List</h2>
       
-            <form @submit.prevent="formSubmit" method="post" class="max-w-xl mx-auto p-6 space-y-6">
-              <div>
-                <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                <input
-                  v-model="form.title"
-                  id="title"
-                  type="text"
-                  class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Title"
-                />
-              </div>
-      
-              <div class="flex gap-1">
-                <label for="active" class="block text-sm font-medium text-gray-700 mb-1">Active</label>
-                <input type="checkbox" name="active" id="active" v-model="form.active">
-              </div>
-      
-              <div class="text-right">
-                <button
-                  type="submit"
-                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition shadow cursor-pointer"
-                >
-                  Enviar
-                </button>
-              </div>
-            </form>
+            <AttributeList />
           </div>
         </template>
 
