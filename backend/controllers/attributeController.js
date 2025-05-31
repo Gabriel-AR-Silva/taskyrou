@@ -31,6 +31,28 @@ exports.createAttribute = async (req, res) => {
     }
 };
 
+exports.updateAttribute = async (req, res) => {
+    try {
+        const attributeId = req.params.id;
+        const data = req.body;
+
+        if(!mongoose.Types.ObjectId.isValid(attributeId)) {
+            res.status(404).send({ message: 'Attribute ID is not valid' });
+        }
+
+        const updatedAttribute = await AttributeModel.findByIdAndUpdate(attributeId, data, { new: true, runValidators: true});
+
+        if (!updatedAttribute) {
+            return res.status(404).send({ message: 'Unable to update attribute' });
+        }
+
+        res.status(200).send({ message: 'Success to update attribute', data: updatedAttribute });
+    } catch (error) {
+        console.log(`Error to update attribute: ${error.message}`);
+        res.status(500).send({ message: 'Error to update', error: error.message });
+    }
+};
+
 exports.addExperiencePointsToAttribute = async (req, res) => {
     try {        
         const attributeId = req.params.id;

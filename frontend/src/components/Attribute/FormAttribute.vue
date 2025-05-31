@@ -1,50 +1,48 @@
 <script setup>
-import axios from "axios";
-import { onMounted, ref } from "vue";
+import { ref, watch } from 'vue'
+import axios from 'axios'
 import { useMessageStore } from '@/stores/messageStore'
-const messageStore = useMessageStore();
 
-let inProccess = ref(false);
+const props = defineProps({
+  attribute: Object
+})
 
-const emit = defineEmits(['attributeUpdated']);
+const emit = defineEmits(['attributeUpdated'])
+const messageStore = useMessageStore()
+
+let inProccess = ref(false)
 
 let form = ref({
-    'title': '',
-    'description': '',
-});
+  _id: '',
+  title: '',
+  description: ''
+})
+
+watch(
+  () => props.attribute,
+  (newAttr) => {
+    if (newAttr) {
+      form.value = { ...newAttr }
+    }
+  },
+  { immediate: true }
+)
 
 const formSubmit = async () => {
-    try {
-        inProccess.value = true;
-        const updateData = {...form.value};
-        const response = await axios.put(`http://localhost:3000/api/v1/attributes`, updateData);
-        messageStore.setMessage(response.data.message);
-        getAttibuteData();
-        emit('attributeUpdated');
-    } catch (error) {
-        console.log(error);
-        messageStore.setMessage(error.message)
-    } finally {
-        inProccess.value = false;
-    }
+  try {
+    inProccess.value = true
+    const updateData = { ...form.value }
+
+    const response = await axios.put(`http://localhost:3000/api/v1/attributes/${form.value._id}`, updateData)
+    messageStore.setMessage(response.data.message)
+    emit('attributeUpdated')
+  } catch (error) {
+    console.log(error)
+    messageStore.setMessage(error.message)
+  } finally {
+    inProccess.value = false
+  }
 }
-
-const getAttibuteData = async () => {
-    try {
-        const response = await axios.get(`http://localhost:3000/api/v1/attributes`);
-
-        form.value.title = response.data.title ?? '';
-        form.value.description = response.data.description ?? '';
-
-    } catch (error) {
-        console.log(error);
-        messageStore.setMessage(error.message)
-    }
-}
-
-onMounted(() => {
-    getAttibuteData()
-})
 </script>
 
 <template>
