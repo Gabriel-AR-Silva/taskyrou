@@ -14,12 +14,9 @@ exports.getAllAttributes = async (req, res) => {
 exports.createAttribute = async (req, res) => {
     try {        
         const data = req.body;
-
-        console.log(data);
-    
         const newAttribute = new AttributeModel(data);
         await newAttribute.save();
-
+        
         if(!newAttribute._id) {
             return res.status(500).send({ message: 'Failed to create attribute' });
         }
@@ -50,6 +47,27 @@ exports.updateAttribute = async (req, res) => {
     } catch (error) {
         console.log(`Error to update attribute: ${error.message}`);
         res.status(500).send({ message: 'Error to update', error: error.message });
+    }
+};
+
+exports.deleteAttribute = async (req, res) => {
+    try {
+        const attributeId = req.params.id;
+
+        if(!mongoose.Types.ObjectId.isValid(attributeId)) {
+            res.status(404).send({ message: 'Attribute ID is not valid' });
+        }
+
+        const deletedAttribute = await AttributeModel.findByIdAndDelete(attributeId);
+
+        if(!deletedAttribute) {
+            return res.status(404).send({ message: 'Attribute not found' });
+        }
+        
+        res.status(200).send({ message: 'Attribute was deleted successfully' });
+    } catch (error) {
+        console.log(`Error deleting attribute: ${error.message}`);
+        res.status(500).send({ message: 'Error deleting attribute', error: error.message });
     }
 };
 

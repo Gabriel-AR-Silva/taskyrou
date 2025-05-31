@@ -22,10 +22,21 @@ const getAttibutes = async () => {
     }
 }
 
-const expandAttrEditModal = ref(null);
-const openModalFormAttribute = (attr) => {
-    selectedAttr.value = { ...attr };
-    expandAttrEditModal.value?.openModal()
+const deleteAttibute = async (attributeId) => {
+    try {
+        const response = await axios.delete(`http://localhost:3000/api/v1/attributes/${attributeId}`);
+        messageStore.setMessage(response.data.message)
+        getAttibutes();
+    } catch (error) {
+        console.log(error);
+        messageStore.setMessage(error.message)
+    }
+}
+
+const expandAttrFormModal = ref(null);
+const openModalFormAttribute = (attr = null) => {
+    selectedAttr.value = attr ? { ...attr } : attr;
+    expandAttrFormModal.value?.openModal()
 }
 
 onMounted(() => {
@@ -35,9 +46,15 @@ onMounted(() => {
 
 <template>
 <div>
-    <Modal :headerTitle="`Edit Attribute: ${selectedAttr?.title}`" ref="expandAttrEditModal">
+    <Modal :headerTitle="selectedAttr?._id ? `Edit Attribute: ${selectedAttr?.title}` : 'Create Attribute'" ref="expandAttrFormModal">
         <FormAttribute :attribute="selectedAttr" @attributeUpdated="getAttibutes"/>
     </Modal>
+
+    <div class="flex justify-end w-full">
+        <button @click="openModalFormAttribute" class="mb-1 bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600 cursor-pointer flex items-center gap-1">
+            <i class="ph ph-plus-circle"></i> Attribute
+        </button>
+    </div>
     
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -65,7 +82,7 @@ onMounted(() => {
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
                         {{ attr.title }}
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 max-w-50">
                         {{ attr.description }}
                     </td>
                     <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800 text-blue-900 font-bold">
@@ -87,11 +104,16 @@ onMounted(() => {
                     </td>
                     <td class="pl-6 py-4 flex gap-3">
                         <i class="ph ph-pencil-simple-line text-amber-600 hover:text-gray-200 hover:bg-amber-600 p-2 border rounded cursor-pointer" @click="openModalFormAttribute(attr)"></i>
-                        <i class="ph ph-trash text-red-600 hover:text-gray-200 hover:bg-red-600 p-2 border rounded cursor-pointer"></i>
+                        <i class="ph ph-trash text-red-600 hover:text-gray-200 hover:bg-red-600 p-2 border rounded cursor-pointer" @click.prevent="deleteAttibute(attr._id)"></i>
                     </td>
                 </tr>
+
             </tbody>
         </table>
+        
+        <div v-if="attributesList.length === 0" class="flex justify-center">
+            <span class="text-xl py-1">Not results found</span>
+        </div>
     </div>
 </div>
 </template>
