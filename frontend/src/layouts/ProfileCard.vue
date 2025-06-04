@@ -95,7 +95,7 @@ onMounted(() => {
             </div>
         </div>
 
-        <div class="relative phrases-box w-full bg-white border-grey py-1 p-4 rounded-sm mt-3 flex justify-center">
+        <div class="relative phrases-box w-full bg-white border-grey py-1 p-4 rounded-sm mt-4 flex justify-center">
             <span class="text-sm text-gray-500">"{{ configurationData.user_phrases }}"</span> 
         </div>
     </div>

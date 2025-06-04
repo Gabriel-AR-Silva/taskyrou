@@ -10,6 +10,8 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@schedule-x/theme-default": "^2.32.0",
+    "@schedule-x/vue": "^2.29.1",
     "@tailwindcss/vite": "^4.0.15",
     "axios": "^1.8.4",
     "boxicons": "^2.1.4",
