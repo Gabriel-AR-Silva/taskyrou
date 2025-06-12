@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const configurationSchema = new Schema({
-    "user_name": {
+    user_name: {
         type: String,
         required: true,
         validate: {
@@ -12,15 +12,15 @@ const configurationSchema = new Schema({
             message: 'User name is required.'
         }
     },
-    "user_image": {
+    user_image: {
         type: String,
         default: '',
     },
-    "user_emoji": {
+    user_emoji: {
         type: String,
         default: '',
     },
-    "user_phrases": {
+    user_phrases: {
         type: String,
         validate: {
             validator: function (value) {

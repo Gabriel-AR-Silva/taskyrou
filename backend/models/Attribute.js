@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const attributeSchema = new Schema({
-    "title": {
+    title: {
         type: String,
         required: true,
         validate: {
@@ -12,7 +12,7 @@ const attributeSchema = new Schema({
             message: 'Title is required.'
         }
     },
-    "description": {
+    description: {
         type: String,
         validate: {
             validator: function (value) {
@@ -21,19 +21,19 @@ const attributeSchema = new Schema({
             message: 'The maximum length is 1000.'
         }
     },
-    "level": {
+    level: {
         type: Number ,
         default: 0
     },
-    "progress_max": {
+    progress_max: {
         type: Number ,
         default: 1000
     },
-    "progress_xp": {
+    progress_xp: {
         type: Number ,
         default: 0
     },
-    "active": {
+    active: {
         type: Boolean,
         default: true
     },

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const listSchema = new Schema({
-    "title": {
+    title: {
         type: String,
         required: true,
         validate: {

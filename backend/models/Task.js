@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const taskSchema = new Schema({
-    "title": {
+    title: {
         type: String,
         validate: {
             validator: function (value) {
@@ -11,7 +11,7 @@ const taskSchema = new Schema({
             message: 'Title is required.'
         }
     },
-    "description": {
+    description: {
         type: String,
         validate: {
             validator: function (value) {
@@ -20,7 +20,7 @@ const taskSchema = new Schema({
             message: 'The maximum length is 1000.'
         }
     },
-    "status": {
+    status: {
         type: String,
         required: true,
         enum: {
