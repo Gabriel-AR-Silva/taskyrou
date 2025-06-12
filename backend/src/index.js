@@ -7,6 +7,7 @@ const attributeRoutes = require('../routes/attributeRoute');
 const configurationRoutes = require('../routes/configurationRoute');
 const listRoutes = require('../routes/listRoute');
 const taskRoutes = require('../routes/taskRoute');
+const taskTemplateRoutes = require('../routes/taskTemplateRoute');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.use('/api/v1/attributes', attributeRoutes);
 app.use('/api/v1/configurations', configurationRoutes);
 app.use('/api/v1/lists', listRoutes);
 app.use('/api/v1/tasks', taskRoutes);
+app.use('/api/v1/task-template', taskTemplateRoutes);
 
 // Connect to MongoDB
 connectDB();

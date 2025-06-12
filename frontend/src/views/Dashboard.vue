@@ -1,5 +1,6 @@
 <script setup>
   import ProfileCard from '@/layouts/ProfileCard.vue';
+  import TaskCard from '@/components/TaskCard.vue';
   import Schedule from '@/components/Schedule.vue';
   import { ref } from 'vue';
 
@@ -51,9 +52,17 @@
         </div>
 
         <div class="col-span-12 lg:col-span-4">
-            <div class="w-full bg-white border-grey py-1 p-2 rounded-sm mb-1 text-md font-medium mt-5" style="border-left: 3px solid #0F1625;">
-              <h2 class="text-xl text-start">| Tasks</h2>
+          <div class="w-full bg-white border-grey py-1 p-2 rounded-sm mb-1 text-md font-medium mt-5" style="border-left: 3px solid #0F1625;">
+            <h2 class="text-xl text-start">| Tasks</h2>
+
+            <div class="p-1 w-full overflow-y-scroll flex flex-col gap-3 pt-5">
+              <TaskCard />
+              <TaskCard />
+              <TaskCard />
+              <TaskCard />
+              <TaskCard />
             </div>
+          </div>
         </div>
     </div>
   </div>
