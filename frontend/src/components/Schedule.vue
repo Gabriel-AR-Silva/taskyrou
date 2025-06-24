@@ -19,6 +19,9 @@ const calendarApp = createCalendar({
     createViewMonthGrid(),
     createViewMonthAgenda(),
   ],
+  locale: 'en-US',
+  timeZone: 'UTC',
+  firstDayOfWeek: 0,
   events: [
     {
       id: 1,
